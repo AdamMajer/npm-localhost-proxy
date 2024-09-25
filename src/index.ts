@@ -113,6 +113,7 @@ function mainEntryFunction(): Promise<void> {
 	registry.addBackend(new DirRegistryBackend);
 	const service = new Service({url: new URL("http://localhost")});
 	registry.serviceProvider = service;
+	let error = false;
 
 	return registerTarballsFromCommandline(registry)
 	.then(() => setupServerAndGetPort(service, registry))
@@ -122,11 +123,15 @@ function mainEntryFunction(): Promise<void> {
 		console.log("npm done. Shutting down proxy");
 	})
 	.catch(msg => {
+		error = true;
 		console.log("An error occurred: " + msg);
 	})
 	.finally(() => {
 		return service.stop()
-		.then(cleanupNpmLocalhostConfig);
+		.then(cleanupNpmLocalhostConfig)
+		.then(() => {
+			if (error) process.exit(1);
+		});
 	})
 }
 
