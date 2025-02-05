@@ -11,8 +11,9 @@ jobs:
         run: |
           echo "Job started by ${{ github.event_name }}"
           echo "Running on ${{ runner.os }}"
-          zypper in -y iproute2
+          zypper in -y iproute2 netcfg
           ip addr
+          cat /etc/hosts
           echo "Sources checked out"
           echo "Fetching deps"
           npm ci
