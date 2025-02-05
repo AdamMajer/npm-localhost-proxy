@@ -11,7 +11,7 @@ jobs:
         run: |
           echo "Job started by ${{ github.event_name }}"
           echo "Running on ${{ runner.os }}"
-          ping -c 1 localhost
+          ip link
           echo "Sources checked out"
           echo "Fetching deps"
           npm ci
