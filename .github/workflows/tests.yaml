@@ -11,7 +11,7 @@ jobs:
         run: |
           echo "Job started by ${{ github.event_name }}"
           echo "Running on ${{ runner.os }}"
-          zypper in iproute2
+          zypper in -y iproute2
           ip link
           echo "Sources checked out"
           echo "Fetching deps"
