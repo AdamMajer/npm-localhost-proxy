@@ -12,7 +12,7 @@ jobs:
           echo "Job started by ${{ github.event_name }}"
           echo "Running on ${{ runner.os }}"
           zypper in -y iproute2
-          ip link
+          ip addr
           echo "Sources checked out"
           echo "Fetching deps"
           npm ci
