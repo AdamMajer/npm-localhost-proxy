@@ -59,8 +59,8 @@ class MockRegistryBackend implements RegistryBackend
 describe("Service setup tests", function() {
 
 	it("parses valid and invalid listen URLs", function() {
-		expect(() => new Service({url: new URL("http://localhost")})).not.toThrowError("invalid port");
-		expect(() => new Service({url: new URL("http://localhost:34")})).toThrowError("invalid port");
+		expect(() => new Service({url: new URL("http://ip6-localhost")})).not.toThrowError("invalid port");
+		expect(() => new Service({url: new URL("http://ip6-localhost:34")})).toThrowError("invalid port");
 		expect(() => new Service({url: new URL("ftp://local:1234")})).toThrow("invalid protocol");
 		expect(() => new Service({url: new URL("")})).toThrowError("Invalid URL");
 		expect(() => new Service({url: null})).toThrowError("Invalid URL");
@@ -146,7 +146,7 @@ describe("server request processing", function() {
 					override_options = {}
 
 				const options = makeRequestOptions({
-					hostname: 'localhost',
+					hostname: 'ip6-localhost',
 					port: port,
 					protocol: 'http:',
 					path: path,
@@ -181,7 +181,7 @@ describe("server request processing", function() {
 	}
 
 	beforeEach(function() {
-		service = new TestService({url: new URL("http://localhost")});
+		service = new TestService({url: new URL("http://ip6-localhost")});
 	});
 
 	it("responds with error on invalid path request", function() {

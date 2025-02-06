@@ -25,7 +25,7 @@ import { TarballRegistryBackend } from '../src/fs_registry';
 class MockRequestHandler implements RequestHandler
 {
 	get url() {
-		return new URL("http://localhost:8888");
+		return new URL("http://ip6-localhost:8888");
 	}
 }
 
@@ -50,7 +50,7 @@ describe("directory registry integration tests", function () {
 			},
 			"dist": {
 				"integrity": "sha512-N+aAxov+CKVS3JuhDIQFr24XvZvwE96Wlhk9dytTg/GmwWoghdOvR8dspx8MVz71O+Y0pA3UPqHF68D6iy8UvQ==",
-				"tarball": "http://localhost:8888/-/assert-1.4.1.tgz",
+				"tarball": "http://ip6-localhost:8888/-/assert-1.4.1.tgz",
 			},
 			"homepage": "https://github.com/defunctzombie/commonjs-assert",
 			"keywords": [
