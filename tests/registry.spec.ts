@@ -179,26 +179,26 @@ it("should update URLs served when the listening URL is updated in the service",
 	return registry.register("tests/pkgs").then(pkg_count => {
 		expect(pkg_count).toBe(3);
 
-		registry.serviceProvider = {url: new URL("http://ip6-localhost:1234") };
+		registry.serviceProvider = {url: new URL("http://127.0.0.1:1234") };
 
 		let assert_pkg = registry.fetchPackages().filter(pkg => pkg.name === 'assert');
 		expect(assert_pkg.length).toBe(1);
 		expect(Object.keys(assert_pkg[0].versions).sort()).toStrictEqual(['1.0.1', '1.4.1']);
-		expect(assert_pkg[0].versions['1.0.1']).toBe("http://ip6-localhost:1234/assert/1.0.1");
-		expect(assert_pkg[0].versions['1.4.1']).toBe("http://ip6-localhost:1234/assert/1.4.1");
+		expect(assert_pkg[0].versions['1.0.1']).toBe("http://127.0.0.1:1234/assert/1.0.1");
+		expect(assert_pkg[0].versions['1.4.1']).toBe("http://127.0.0.1:1234/assert/1.4.1");
 
 		let assert_pkg_version = registry.fetchPkgVersion('assert', '1.4.1');
-		expect(assert_pkg_version['dist']['tarball']).toBe("http://ip6-localhost:1234/-/assert-1.4.1.tgz");
+		expect(assert_pkg_version['dist']['tarball']).toBe("http://127.0.0.1:1234/-/assert-1.4.1.tgz");
 
-		registry.serviceProvider = { url: new URL("http://ip6-localhost:1235") };
+		registry.serviceProvider = { url: new URL("http://127.0.0.1:1235") };
 
 		assert_pkg = registry.fetchPackages().filter(pkg => pkg.name === 'assert');
 		expect(assert_pkg.length).toBe(1);
 		expect(Object.keys(assert_pkg[0].versions).sort()).toStrictEqual(['1.0.1', '1.4.1']);
-		expect(assert_pkg[0].versions['1.0.1']).toBe("http://ip6-localhost:1235/assert/1.0.1");
-		expect(assert_pkg[0].versions['1.4.1']).toBe("http://ip6-localhost:1235/assert/1.4.1");
+		expect(assert_pkg[0].versions['1.0.1']).toBe("http://127.0.0.1:1235/assert/1.0.1");
+		expect(assert_pkg[0].versions['1.4.1']).toBe("http://127.0.0.1:1235/assert/1.4.1");
 
 		assert_pkg_version = registry.fetchPkgVersion('assert', '1.4.1');
-		expect(assert_pkg_version['dist']['tarball']).toBe("http://ip6-localhost:1235/-/assert-1.4.1.tgz");
+		expect(assert_pkg_version['dist']['tarball']).toBe("http://127.0.0.1:1235/-/assert-1.4.1.tgz");
 	});
 });
