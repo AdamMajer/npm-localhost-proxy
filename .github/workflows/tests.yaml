@@ -1,7 +1,7 @@
 name: Unit tests
 on: [push, pull_request]
 jobs:
-  containers-tests-job:
+  unit-tests:
     runs-on: ubuntu-latest
     container:
       image: registry.opensuse.org/opensuse/bci/nodejs:latest
@@ -11,11 +11,6 @@ jobs:
         run: |
           echo "Job started by ${{ github.event_name }}"
           echo "Running on ${{ runner.os }}"
-          zypper in -y iproute2 netcfg
-          ip addr
-          cat /etc/hosts
-          echo "Sources checked out"
-          echo "Fetching deps"
           npm ci
           npm run test
 
